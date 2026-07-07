@@ -1,39 +1,33 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/📱%20HP%20DEVELOPER-SETUP-brightgreen?style=for-the-badge" alt="HP Developer Setup">
-</p>
+# HP Developer - Setup
 
-<h1 align="center">📱 Setup HP Developer</h1>
-<p align="center"><b>Kontrol Roblox Studio langsung dari HP Android kamu</b></p>
+Konfigurasi Termux + OpenCode untuk mengontrol Roblox Studio dari HP.
 
----
+## Prasyarat
 
-## ⚡ Quick Setup
+- **Termux** dari F-Droid (bukan Play Store)
+  - https://f-droid.org/packages/com.termux/
 
-### 1️⃣ Install Termux
+## Instalasi
 
-Download **Termux** dari **F-Droid** (bukan Play Store!):
-
-```
-https://f-droid.org/packages/com.termux/
-```
-
-### 2️⃣ Jalankan Script
-
-Buka Termux, jalankan:
+Buka Termux, jalankan perintah berikut:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/AstralXCode/ROBLOX-MCP-VIA-MOBILE/main/phone/setup.sh | bash
 ```
 
-Script akan menginstall **OpenCode** + config dasar.
+Script akan menginstall OpenCode dan membuat file konfigurasi dasar.
 
-### 3️⃣ Masukkan URL dari Client
+## Konfigurasi
+
+Edit file konfigurasi:
 
 ```bash
 nano ~/.config/opencode/opencode.json
 ```
 
-Ubah `GANTI_DENGAN_URL_CLOUDFLARE` menjadi URL dari client:
+Ubah `GANTI_DENGAN_URL_CLOUDFLARE` dengan URL yang diterima dari client.
+
+Contoh:
 
 ```json
 {
@@ -41,37 +35,18 @@ Ubah `GANTI_DENGAN_URL_CLOUDFLARE` menjadi URL dari client:
 }
 ```
 
-> Simpan: **Ctrl+X** → **Y** → **Enter**
+Simpan: `Ctrl+X` → `Y` → `Enter`
 
-### 4️⃣ Jalankan OpenCode
+## Menjalankan OpenCode
 
 ```bash
 opencode
 ```
 
----
+## Troubleshooting
 
-## 📝 Catatan
-
-| Situasi | Tindakan |
-|---------|----------|
-| Client restart PC | Minta **URL baru** |
-| Ganti jaringan (4G/WiFi) | Tetap bisa, **tidak perlu setup ulang** |
-| Lupa URL lama | Minta URL baru dari client |
-
----
-
-## ❓ Troubleshooting
-
-| ❗ Masalah | 💡 Solusi |
-|-------|--------|
-| `curl: not found` | Install dulu: `pkg install curl` |
-| `opencode: command not found` | Jalankan: `source ~/.bashrc` |
-| Tidak bisa connect | Pastikan URL client **masih aktif** |
-| Error di OpenCode | Cek URL sudah diakhiri **`/mcp`** |
-
----
-
-<p align="center">
-  <sub>Pastikan PC client sedang menjalankan setup.bat</sub>
-</p>
+| Masalah | Solusi |
+|---------|--------|
+| `opencode: command not found` | Jalankan `source ~/.bashrc` |
+| Tidak bisa connect ke server | Minta URL baru dari client |
+| Error "connection refused" | Pastikan client sedang menjalankan setup.bat |
