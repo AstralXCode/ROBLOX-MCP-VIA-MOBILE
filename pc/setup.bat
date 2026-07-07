@@ -8,7 +8,7 @@ echo ============================================
 echo.
 
 :: [1] Cek Node.js
-echo [1/4] Memeriksa Node.js...
+echo [1/3] Memeriksa Node.js...
 where node >nul 2>&1
 if %errorlevel% neq 0 (
     echo [ERROR] Node.js belum terinstall!
@@ -19,35 +19,29 @@ if %errorlevel% neq 0 (
 echo [OK]
 echo.
 
-:: [2] Clone + Install Roblox MCP
-echo [2/4] Setup Roblox MCP Server...
-if not exist "package.json" (
-    git clone https://github.com/paralov/roblox-studio-opencode-mcp . 2>nul
+:: [2] Cek MCP bawaan Roblox
+echo [2/3] Memeriksa MCP Roblox Studio...
+if not exist "%LOCALAPPDATA%\Roblox\mcp.bat" (
+    echo [ERROR] mcp.bat tidak ditemukan!
+    echo Pastikan Roblox Studio sudah terinstall dan versi terbaru.
+    pause
+    exit /b 1
 )
-if not exist "node_modules" (
-    call npm install
-    call npm run build
-)
-call npm run install-plugin 2>nul
-echo [OK] Plugin terinstall di Roblox Studio
+echo [OK] mcp.bat ditemukan
 echo.
 
-:: [3] Download cloudflared (kalo belum ada)
-echo [3/4] Memeriksa cloudflared...
-if not exist "cloudflared.exe" (
-    echo Downloading cloudflared...
-    curl -sL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe -o cloudflared.exe
-)
-echo [OK]
-echo.
-
-:: [4] Jalanin server + tunnel
-echo [4/4] Menjalankan server...
+:: [3] Download cloudflared + jalanin
+echo [3/3] Menjalankan server...
 taskkill /f /im node.exe 2>nul
 taskkill /f /im cloudflared.exe 2>nul
 timeout /t 2 >nul
 
-start "MCP-Proxy" cmd /c "npx mcp-proxy --port 8080 --host 0.0.0.0 -- node dist/index.js"
+if not exist "cloudflared.exe" (
+    echo Downloading cloudflared...
+    curl -sL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe -o cloudflared.exe
+)
+
+start "MCP-Proxy" cmd /c "npx mcp-proxy --port 8080 --host 0.0.0.0 -- cmd /c ""%LOCALAPPDATA%\Roblox\mcp.bat"""
 timeout /t 4 >nul
 
 echo.
