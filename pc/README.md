@@ -1,45 +1,22 @@
-# Setup PC Client - Roblox MCP via Mobile (Cloudflare)
+# Setup PC Client - Roblox MCP via Mobile
 
-Panduan untuk **client** — jadikan PC sebagai jembatan Roblox MCP ke developer.
+## Cara Setup (30 Detik)
 
-## Yang Dibutuhkan
+### 1. Download folder ini
 
-1. **Node.js** — https://nodejs.org (install LTS, next-next saja)
-2. **Roblox Studio** (versi terbaru, sudah ada MCP bawaan)
-3. **Koneksi internet**
+### 2. Double-click `setup.bat`
 
-## Cara Setup (1 Menit)
+Klik **Yes** jika ada izin administrator.
 
-### 1. Install Node.js
+### 3. Copy URL yang muncul
 
-Download dari https://nodejs.org, install (next-next).
+Kirim URL `https://xxx.trycloudflare.com` ke developer.
 
-### 2. Download & jalankan `setup.bat`
+**Selesai.**
 
-- Download folder ini, double-click `setup.bat`
-- Script akan otomatis:
-  - ✅ Download cloudflared
-  - ✅ Jalankan MCP bawaan Roblox via proxy
-  - ✅ Buka Cloudflare Tunnel
+## Yang Perlu Diperhatikan
 
-### 3. Copy URL
-
-Akan muncul jendela baru bertuliskan:
-```
-https://acak-acak.trycloudflare.com
-```
-Copy URL itu dan kirim ke developer.
-
-**Udah. Selesai.**
-
-## Cara Matikan
-
-Tutup semua jendela CMD.
-
-## Troubleshooting
-
-| Masalah | Solusi |
-|---------|--------|
-| "mcp.bat tidak ditemukan" | Update Roblox Studio ke versi terbaru |
-| Node.js error | Install dari https://nodejs.org |
-| Gagal download cloudflared | Matikan antivirus sementara |
+- **Roblox Studio** harus sudah terinstall (versi terbaru)
+- Biarkan jendela CMD tetap terbuka selama dipakai
+- Tutup semua jendela CMD untuk mematikan server
+- URL **berubah** tiap kali jalankan ulang → minta URL baru ke developer

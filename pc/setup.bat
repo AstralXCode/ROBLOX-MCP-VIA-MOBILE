@@ -2,19 +2,30 @@
 title Roblox MCP - Setup
 color 0A
 
+:: Minta admin (biar bisa install Node.js)
+net session >nul 2>&1
+if %errorlevel% neq 0 (
+    powershell start -verb runas "%~dpnx0"
+    exit /b
+)
+
 echo ============================================
 echo    ROBLOX MCP VIA MOBILE - PC SETUP
 echo ============================================
 echo.
 
-:: [1] Cek Node.js
+:: [1] Install Node.js kalo belum ada
 echo [1/3] Memeriksa Node.js...
 where node >nul 2>&1
 if %errorlevel% neq 0 (
-    echo [ERROR] Node.js belum terinstall!
-    echo Download: https://nodejs.org (LTS, next-next)
-    pause
-    exit /b 1
+    echo Node.js belum terinstall. Menginstall...
+    winget install OpenJS.NodeJS.LTS -h --accept-source-agreements >nul 2>&1
+    if %errorlevel% neq 0 (
+        echo Gagal via winget, download langsung...
+        curl -sL https://nodejs.org/dist/v22.14.0/node-v22.14.0-x64.msi -o node-installer.msi
+        msiexec /i node-installer.msi /quiet /norestart
+        del node-installer.msi
+    )
 )
 echo [OK]
 echo.
@@ -27,7 +38,7 @@ if not exist "%LOCALAPPDATA%\Roblox\mcp.bat" (
     pause
     exit /b 1
 )
-echo [OK] mcp.bat ditemukan
+echo [OK]
 echo.
 
 :: [3] Download cloudflared + jalanin
@@ -37,7 +48,7 @@ taskkill /f /im cloudflared.exe 2>nul
 timeout /t 2 >nul
 
 if not exist "cloudflared.exe" (
-    echo Downloading cloudflared...
+    echo Download cloudflared...
     curl -sL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe -o cloudflared.exe
 )
 
