@@ -2,112 +2,36 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>HP Setup - Roblox MCP</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #0f0f0f;
-  color: #e0e0e0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-.login-box, .content {
-  background: #1a1a1a;
-  padding: 2rem;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 600px;
-  border: 1px solid #333;
-}
-.login-box h2 { margin-bottom: 1rem; color: #fff; }
-.login-box input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 1rem;
-  background: #2a2a2a;
-  border: 1px solid #444;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 1rem;
-}
-.login-box button {
-  width: 100%;
-  padding: 10px;
-  background: #5865f2;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 1rem;
-  cursor: pointer;
-}
-.login-box button:hover { background: #4752c4; }
-.error { color: #f04747; margin-top: 0.5rem; display: none; }
-h3 { color: #fff; margin: 1.5rem 0 0.5rem; }
-code {
-  display: block;
-  background: #2a2a2a;
-  padding: 12px;
-  border-radius: 4px;
-  margin: 0.5rem 0;
-  font-size: 0.9rem;
-  border-left: 3px solid #5865f2;
-}
-ol { padding-left: 1.2rem; line-height: 1.8; }
-hr { border: none; border-top: 1px solid #333; margin: 1.5rem 0; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f0f0f;color:#e0e0e0;display:flex;justify-content:center;align-items:center;min-height:100vh}
+.box{background:#1a1a1a;padding:2rem;border-radius:8px;width:90%;max-width:600px;border:1px solid #333}
+.box h2{color:#fff;margin-bottom:1rem}
+.box input{width:100%;padding:10px;margin-bottom:1rem;background:#2a2a2a;border:1px solid #444;border-radius:4px;color:#fff;font-size:1rem}
+.box button{width:100%;padding:10px;background:#5865f2;border:none;border-radius:4px;color:#fff;font-size:1rem;cursor:pointer}
+.box button:hover{background:#4752c4}
+.err{color:#f04747;margin-top:.5rem;display:none}
+#c{display:none}
+h3{color:#fff;margin:1.5rem 0 .5rem}
+code{display:block;background:#2a2a2a;padding:12px;border-radius:4px;margin:.5rem 0;font-size:.9rem;border-left:3px solid #5865f2}
+hr{border:none;border-top:1px solid #333;margin:1.5rem 0}
+a{color:#5865f2}
 </style>
 </head>
 <body>
-
-<div class="login-box" id="loginBox">
-  <h2>Masukkan Password</h2>
-  <input type="password" id="passInput" placeholder="Password" autofocus>
-  <button onclick="checkPass()">Masuk</button>
-  <div class="error" id="errorMsg">Password salah</div>
+<div class="box" id="l">
+<h2>Masukkan Password</h2>
+<input type="password" id="p" placeholder="Password" autofocus onkeydown="if(event.key==='Enter')k()">
+<button onclick="k()">Masuk</button>
+<div class="err" id="e">Password salah</div>
 </div>
-
-<div class="content" id="content" style="display:none">
-  <h2>Setup HP - Roblox MCP via Mobile</h2>
-
-  <h3>Prasyarat</h3>
-  <ul>
-    <li>Termux dari F-Droid (bukan Play Store)</li>
-    <li>https://f-droid.org/packages/com.termux/</li>
-  </ul>
-
-  <h3>1. Install Termux</h3>
-  <p>Download dari F-Droid, install, buka.</p>
-
-  <h3>2. Jalankan script</h3>
-  <code>curl -fsSL https://raw.githubusercontent.com/AstralXCode/ROBLOX-MCP-VIA-MOBILE/main/phone/setup.sh | bash</code>
-
-  <h3>3. Masukkan URL dari client</h3>
-  <code>nano ~/.config/opencode/opencode.json</code>
-  <p>Ganti <strong>GANTI_DENGAN_URL_CLOUDFLARE</strong> dengan URL dari client.</p>
-  <p>Contoh: <code>https://acak-acak.trycloudflare.com/mcp</code></p>
-  <p>Simpan: Ctrl+X → Y → Enter</p>
-
-  <h3>4. Jalankan OpenCode</h3>
-  <code>opencode</code>
-
-  <hr>
-  <p style="color:#888;font-size:0.9rem">Password: (dari developer)</p>
-</div>
-
+<div id="c"></div>
 <script>
-function checkPass() {
-  var pass = document.getElementById('passInput').value;
-  if (pass === 'robloxmcp2024') {
-    document.getElementById('loginBox').style.display = 'none';
-    document.getElementById('content').style.display = 'block';
-  } else {
-    document.getElementById('errorMsg').style.display = 'block';
-  }
-}
+var _d=[50,76,67,78,7,80,82,60,29,25,22,0,18,120,98,20,95,79,48,3,13,20,2,27,80,127,115,98,20,4,6,3,76,34,23,15,10,28,87,12,29,92,64,81,94,4,92,70,61,17,17,65,73,83,70,19,27,94,67,7,75,83,95,5,94,14,14,88,27,81,54,9,29,21,24,27,80,86,81,64,93,82,41,79,40,29,23,4,7,80,26,82,71,95,19,1,66,60,3,25,20,67,35,70,95,64,81,91,83,77,0,6,70,81,15,25,12,12,83,20,26,29,7,10,82,90,5,23,4,66,67,8,27,93,9,79,8,29,23,4,7,94,93,66,85,27,2,14,1,7,14,31,8,16,95,81,95,95,26,6,10,16,1,26,0,66,65,80,65,68,75,88,23,82,64,15,0,20,2,17,74,17,5,10,2,71,9,80,78,81,62,64,39,2,93,89,86,20,62,6,12,7,83,87,12,93,76,29,92,91,10,78,64,23,0,81,68,5,80,78,3,30,18,125,28,28,22,13,3,20,77,55,21,64,93,71,76,78,64,10,95,81,68,29,93,52,93,71,92,88,29,14,6,76,11,25,31,10,80,116,29,118,70,29,6,6,64,79,17,3,16,4,83,92,94,24,82,13,23,7,14,86,81,76,0,12,12,90,7,76,93,76,76,37,25,1,2,30,89,81,92,20,1,12,16,5,31,12,81,76,24,1,14,14,87,29,11,7,82,12,13,31,15,80,31,86,65,103,62,79,10,24,27,8,30,89,95,29,66,83,67,92,8,11,24,7,13,15,22,3,87,66,81,91,28,27,7,2,27,86,14,12,29,29,113,65,64,0,14,14,52,44,23,9,6,95,96,127,112,120,61,55,79,33,44,40,64,53,57,115,29,127,123,48,38,46,41,64,21,12,10,30,29,64,90,91,28,10,77,31,10,12,24,19,94,65,88,18,72,82,13,3,31,7,68,66,0,31,86,85,12,8,26,92,92,95,65,88,32,2,3,71,91,89,85,28,79,55,62,35,88,9,2,2,91,16,81,88,27,10,12,24,83,87,5,80,78,14,83,93,80,23,81,12,13,1,23,77,29,95,28,83,93,90,20,6,5,67,0,8,8,13,19,93,84,87,27,29,31,7,2,12,23,9,6,94,88,67,93,90,78,64,1,3,11,29,83,95,0,12,119,83,90,6,6,66,80,13,70,42,34,62,102,121,109,112,55,33,37,45,33,39,56,49,60,109,115,126,123,39,43,36,32,46,42,40,95,95,80,14,18,80,23,1,5,13,1,88,56,49,60,18,84,83,70,27,79,1,0,6,29,3,23,94,14,31,66,10,78,31,92,47,0,22,25,12,24,8,16,14,87,29,11,7,82,7,12,25,19,3,8,31,29,85,17,14,9,65,14,27,12,8,94,70,66,75,87,30,0,23,8,9,20,12,17,21,28,83,93,89,93,2,1,28,83,87,14,12,20,87,14,14,27,2,81,94,28,81,43,4,14,0,83,94,8,20,49,27,16,0,68,32,77,78,86,85,68,9,20,43,79,79,74,8,12,86,67,53,92,68,87,70,78,64,18,82,83,16,94,93,68,28,16,120,85,30,14,12,7,14,22,77,44,0,87,94,113,91,22,10,94,67,7,75,83,95,19,93,84,87,10,29,31,7,2,12,23,9,6,76,29,83,93,80,23,81,94,4,29,70,81,19,80,65,68,75,88,23,82,64,15,0,20,2,17,74,17,8,10,12,73,9,13,2,27,85,30,10,10,87,10,2,26,75,29,7,1,77,70,61,2,3,65,71,93,70,22,85,66,30,0,26,1,12,8,95,83,66,6,66,93,86,80,64,8,83];
+function _x(b,p){var r='';for(var i=0;i<b.length;i++){r+=String.fromCharCode(b[i]^p.charCodeAt(i%p.length))}return r}
+window.k=function(){var p=document.getElementById('p').value;var h=_x(_d.slice(0,3),p);if(h==='@#!'){document.getElementById('l').style.display='none';document.getElementById('c').innerHTML=_x(_d.slice(3),p);document.getElementById('c').style.display='block';document.getElementById('e').style.display='none'}else{document.getElementById('e').style.display='block'}}
 </script>
-
 </body>
 </html>
