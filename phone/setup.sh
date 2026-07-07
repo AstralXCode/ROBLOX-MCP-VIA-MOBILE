@@ -16,6 +16,8 @@ export PATH="$HOME/.opencode/bin:$PATH"
 echo 'export PATH="$HOME/.opencode/bin:$PATH"' >> ~/.bashrc
 echo ""
 
+mkdir -p ~/.config/opencode
+
 cat > ~/.config/opencode/opencode.json << 'EOF'
 {
   "$schema": "https://opencode.ai/config.json",

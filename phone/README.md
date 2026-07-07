@@ -1,45 +1,77 @@
-# Setup HP - Roblox MCP via Mobile (Cloudflare)
+<p align="center">
+  <img src="https://img.shields.io/badge/📱%20HP%20DEVELOPER-SETUP-brightgreen?style=for-the-badge" alt="HP Developer Setup">
+</p>
 
-Panduan untuk **developer** — kontrol Roblox Studio dari HP.
+<h1 align="center">📱 Setup HP Developer</h1>
+<p align="center"><b>Kontrol Roblox Studio langsung dari HP Android kamu</b></p>
 
-## Yang Dibutuhkan
+---
 
-1. **Termux** — install dari F-Droid (bukan Play Store)
-   - https://f-droid.org/packages/com.termux/
-2. **Koneksi internet** (WiFi/4G/5G)
+## ⚡ Quick Setup
 
-## Cara Setup
+### 1️⃣ Install Termux
 
-### 1. Install Termux
+Download **Termux** dari **F-Droid** (bukan Play Store!):
 
-Download dari F-Droid, install, buka.
+```
+https://f-droid.org/packages/com.termux/
+```
 
-### 2. Jalankan script
+### 2️⃣ Jalankan Script
+
+Buka Termux, jalankan:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/AstralXCode/ROBLOX-MCP-VIA-MOBILE/main/phone/setup.sh | bash
 ```
 
-### 3. Masukkan URL dari client
+Script akan menginstall **OpenCode** + config dasar.
+
+### 3️⃣ Masukkan URL dari Client
 
 ```bash
 nano ~/.config/opencode/opencode.json
 ```
 
-Ganti `GANTI_DENGAN_URL_CLOUDFLARE` dengan URL dari client.
-Contoh: `https://acak-acak.trycloudflare.com/mcp`
+Ubah `GANTI_DENGAN_URL_CLOUDFLARE` menjadi URL dari client:
 
-Simpan: Ctrl+X → Y → Enter
+```json
+{
+  "url": "https://acak-acak.trycloudflare.com/mcp"
+}
+```
 
-### 4. Jalankan OpenCode
+> Simpan: **Ctrl+X** → **Y** → **Enter**
+
+### 4️⃣ Jalankan OpenCode
 
 ```bash
 opencode
 ```
 
-**Siap!** OpenCode di HP terhubung ke Roblox Studio di PC client.
+---
 
-## Catatan
+## 📝 Catatan
 
-- URL berubah tiap client restart — minta URL baru tiap mau make
-- HP dan PC tidak perlu dalam 1 jaringan (beda WiFi/4G bisa)
+| Situasi | Tindakan |
+|---------|----------|
+| Client restart PC | Minta **URL baru** |
+| Ganti jaringan (4G/WiFi) | Tetap bisa, **tidak perlu setup ulang** |
+| Lupa URL lama | Minta URL baru dari client |
+
+---
+
+## ❓ Troubleshooting
+
+| ❗ Masalah | 💡 Solusi |
+|-------|--------|
+| `curl: not found` | Install dulu: `pkg install curl` |
+| `opencode: command not found` | Jalankan: `source ~/.bashrc` |
+| Tidak bisa connect | Pastikan URL client **masih aktif** |
+| Error di OpenCode | Cek URL sudah diakhiri **`/mcp`** |
+
+---
+
+<p align="center">
+  <sub>Pastikan PC client sedang menjalankan setup.bat</sub>
+</p>
