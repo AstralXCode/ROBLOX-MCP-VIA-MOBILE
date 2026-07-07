@@ -1,19 +1,27 @@
 # ROBLOX MCP VIA MOBILE
 
-Menghubungkan **OpenCode di HP Android (Termux)** ke **Roblox MCP Server** yang berjalan di **PC Client**.
+Menghubungkan **OpenCode di HP Android (Termux)** ke **Roblox MCP Server** yang berjalan di **PC Client** — menggunakan **Tailscale** sebagai jembatan.
 
 ## Cara Kerja
 
 ```
-HP (OpenCode) ---> Internet ---> PC (mcp-proxy) ---> Roblox MCP Server ---> Roblox Studio
+HP (OpenCode) ─── Tailscale ───> PC (mcp-proxy:8080) ───> Roblox MCP Server ───> Roblox Studio
 ```
 
 ## Panduan Cepat
 
 | Perangkat | Yang perlu dilakukan |
 |-----------|---------------------|
-| **PC Client** | 1. Install Node.js & ngrok  2. Double-click `setup.bat`  3. Kirim URL ke developer |
-| **HP Developer** | 1. Install Termux & OpenCode  2. Jalankan `setup.sh`  3. Masukkan URL dari PC |
+| **PC Client** | 1. Install Node.js  2. Install Tailscale (login Google)  3. Double-click `setup.bat`  4. Kirim IP Tailscale ke developer |
+| **HP Developer** | 1. Install Termux & Tailscale (login Google same)  2. Jalankan `setup.sh`  3. Masukkan IP Tailscale PC |
+
+## Kenapa Tailscale?
+
+- ✅ Stabil 24 jam — tidak seperti ngrok/localhost.run
+- ✅ IP tetap (100.x.x.x) — tidak berubah setiap restart
+- ✅ Enkripsi end-to-end
+- ✅ Gratis untuk personal
+- ✅ Bisa beda jaringan (WiFi/4G dari mana aja)
 
 ## Struktur Repo
 

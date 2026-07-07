@@ -1,50 +1,58 @@
-# Setup PC Client - Roblox MCP via Mobile
+# Setup PC Client - Roblox MCP via Mobile (Tailscale)
 
 Panduan ini untuk **client** yang PC-nya akan dijadikan jembatan Roblox MCP ke developer.
 
 ## Yang Dibutuhkan
 
 1. **Node.js** - https://nodejs.org (install LTS, next-next saja)
-2. **ngrok** - https://ngrok.com/download
-   - Download `ngrok.exe`
-   - Extract, taruh di folder yang sama dengan `setup.bat`
+2. **Tailscale** - https://tailscale.com/download
+   - Install, login dengan **akun Google/GitHub**
 3. **Roblox Studio** (sudah terinstall)
 4. **Koneksi internet**
 
-## Cara Setup (2 Menit)
+## Cara Setup (3 Menit)
 
-### 1. Download file
+### 1. Install Tailscale
 
-Download & extract folder ini ke PC.
+- Download & install dari https://tailscale.com/download
+- Login pakai **akun Google** (cepat, tidak perlu verifikasi)
+- Pastikan status **Connected**
 
-### 2. Double-click `setup.bat`
+### 2. Download & jalankan `setup.bat`
 
-Script akan otomatis:
-- ✅ Install semua dependencies
-- ✅ Install plugin ke Roblox Studio
-- ✅ Jalankan server + tunnel ngrok
+- Double-click `setup.bat`
+- Script akan otomatis:
+  - ✅ Clone Roblox MCP server
+  - ✅ Install dependencies
+  - ✅ Install plugin ke Roblox Studio
+  - ✅ Jalankan MCP proxy di port 8080
 
 ### 3. Buka Roblox Studio
 
-Klik tab **Plugins** -> klik tombol **MCP Bridge** (harus aktif).
+Klik tab **Plugins** → Klik tombol **MCP Bridge**
 
-### 4. Kirim URL ke Developer
+### 4. Cari IP Tailscale
 
-- Buka http://localhost:4040 di browser
-- Copy URL yang ada tulisan `https://xxxx.ngrok.io`
-- Kirim URL itu ke developer
+Buka CMD, ketik:
+```
+tailscale ip -4
+```
+Akan muncul IP seperti `100.85.23.177`
+
+### 5. Kirim IP ke Developer
+
+Kirim angka IP itu ke developer. **Selesai!**
 
 ## Troubleshooting
 
 | Masalah | Solusi |
 |---------|--------|
-| "Node.js not found" | Install Node.js dari https://nodejs.org |
-| "ngrok not found" | Extract ngrok.exe ke folder yang sama |
-| Port 8080 sudah dipakai | Tutup program lain atau restart PC |
+| "Node.js not found" | Install dari https://nodejs.org |
+| Port 8080 sudah dipakai | Tutup program lain / restart PC |
 | MCP Bridge tidak muncul | Restart Roblox Studio, cek Plugins tab |
-| Tunnel error | Matikan antivirus/firewall sementara |
+| Bedanya tailnet/akun | Pastikan PC dan HP pake **akun Google yang sama** di Tailscale |
 
-## Cara Menghentikan Server
+## Cara Matikan Server
 
-- Tutup aja jendela Command Prompt yang terbuka
-- Atau restart PC
+- Tutup jendela CMD yang terbuka, atau
+- Restart PC

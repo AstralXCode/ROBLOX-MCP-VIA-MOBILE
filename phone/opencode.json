@@ -3,7 +3,7 @@
   "mcp": {
     "roblox-studio": {
       "type": "remote",
-      "url": "https://GANTI_DENGAN_URL_NGROK/mcp"
+      "url": "http://GANTI_DENGAN_TAILSCALE_IP:8080/mcp"
     }
   }
 }
